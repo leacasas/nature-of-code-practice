@@ -1,5 +1,5 @@
 // jshint ignore: start
-var amountOfVehicles = 100;
+var amountOfVehicles = 1024;
 var vehicles = [];
 
 function setup(){
@@ -10,12 +10,11 @@ function setup(){
 }
 
 function draw(){
-    background(255);
+    background(0);
     var mouse = createVector(mouseX, mouseY);
     fill(200);
-    stroke(0);
-    strokeWeight(2);
-    ellipse(mouse.x, mouse.y, 20, 20);
+    noStroke();
+    ellipse(mouse.x, mouse.y, 10, 10);
     for(var i = 0; i < amountOfVehicles; i++){
         vehicles[i].seek(mouse);
         vehicles[i].update();
@@ -25,11 +24,11 @@ function draw(){
 
 var Vehicle = function(x, y){
     this.position = createVector(x, y);
-    this.velocity = createVector(0, 2);
+    this.velocity = createVector(random(-1, 1), random(-1, 1));
     this.acceleration = createVector(0, 0);
-    this.maxSpeed = 5;
+    this.maxSpeed = 7;
     this.maxForce = 0.02;
-    this.r = 6;
+    this.r = 4;
 };
 // Calculates steering force towards target.
 // Steering force = desired velocity - current velocity
@@ -52,16 +51,15 @@ Vehicle.prototype.update = function(){
 };
 Vehicle.prototype.draw = function(){
     var theta = this.velocity.heading() + PI/2;
-    fill(127);
-    stroke(0);
-    strokeWeight(1);
+    fill(0, 255, 0);
+    noStroke()
     push();
     translate(this.position.x, this.position.y);
     rotate(theta);
     beginShape();
-    vertex(0, -this.r * 2);
-    vertex(-this.r, this.r * 2);
-    vertex(this.r, this.r * 2);
+    vertex(0, -this.r * 1.5);
+    vertex(-this.r, this.r);
+    vertex(this.r, this.r);
     endShape(CLOSE);
     pop();
 };

@@ -26,8 +26,8 @@ var Vehicle = function(x, y){
     this.position = createVector(x, y);
     this.velocity = createVector(random(-1, 1), random(-1, 1));
     this.acceleration = createVector(0, 0);
-    this.maxSpeed = 7;
-    this.maxForce = 0.02;
+    this.maxSpeed = 4;
+    this.maxForce = 0.1;
     this.r = 6;
 };
 // A method that calculates a steering force towards a target
@@ -41,7 +41,7 @@ Vehicle.prototype.arrive = function(target){
         var m = map(d, 0, damping, 0, this.maxSpeed);
         desired.setMag(m);
     } else {
-        desired.setMag(this.maxSpeed);
+        desired.mult(this.maxSpeed);
     }
 
     // Steering = desired - velocity

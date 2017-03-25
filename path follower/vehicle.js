@@ -57,18 +57,19 @@ Vehicle.prototype.follow = function(path){
     
     // Draw the debugging stuff
     if (debug) {
-      fill(0);
-      stroke(0);
+      noFill();
+      stroke(0, 100, 255, 85);
       line(this.position.x, this.position.y, predictPosition.x, predictPosition.y);
       ellipse(predictPosition.x, predictPosition.y, 4, 4);
 
       // Draw normal position
-      fill(0);
-      stroke(0);
+      fill(225, 85);
+      stroke(0, 100, 255, 85);
       line(predictPosition.x, predictPosition.y, normalPoint.x, normalPoint.y);
       ellipse(normalPoint.x, normalPoint.y, 4, 4);
-      stroke(0);
-      if (distance > path.radius) fill(255, 0, 0);
+      stroke(0, 100, 255, 85);
+      if (distance > path.radius) 
+        fill(255, 0, 0);
       noStroke();
       ellipse(target.x + dir.x, target.y + dir.y, 8, 8);
     }
@@ -90,9 +91,10 @@ Vehicle.prototype.seek = function(target){
 };
 Vehicle.prototype.display = function(){
     var theta = this.velocity.heading() + PI/2;
-    fill(175);
-    stroke(0);
+    
     push();
+    fill(0, 255, 0);
+    noStroke();
     translate(this.position.x, this.position.y);
     rotate(theta);
     beginShape();
@@ -107,5 +109,8 @@ Vehicle.prototype.borders = function(path){
     if (this.position.x > path.end.x + this.size) {
       this.position.x = path.start.x - this.size;
       this.position.y = path.start.y + (this.position.y - path.end.y);
+    } else if (this.position.x < path.start.x - this.size) {
+      this.position.x = path.end.x;
+      this.position.y = path.end.y + (this.position.y - path.start.y);
     }
-};
+};  

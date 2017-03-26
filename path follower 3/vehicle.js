@@ -5,7 +5,7 @@ var Vehicle = function(position, size, maxSpeed, maxForce){
     this.maxSpeed = maxSpeed;
     this.maxForce = maxForce;
     this.acceleration = createVector(0, 0);
-    this.velocity = createVector(-this.maxSpeed, this.maxSpeed);
+    this.velocity = createVector(random(-this.maxSpeed, this.maxSpeed), random(-this.maxSpeed, this.maxSpeed));
 };
 Vehicle.prototype.update = function(){
     this.velocity.add(this.acceleration);
@@ -29,28 +29,35 @@ Vehicle.prototype.follow = function(path){
     var normal, target;
     var worldRecord = 1000000;
 
-    for(var i = 0; i < path.points.length - 1; i++){
+    for(var i = 0; i < path.points.length; i++){
         var a = path.points[i];
-        var b = path.points[i + 1];
+        var b = path.points[(i + 1) % path.points.length]; // Wraparound
         var normalPoint = getNormalPoint(predictPosition, a, b);
 
-        if(normalPoint.x < a.x || normalPoint.x > b.x)
+        // Check if normal is on line segment.
+        // If it's not within the line segment, consider the normal to just be the end of the line segment (point b)
+        var dir = p5.Vector.sub(b, a);
+        if(normalPoint.x < min(a.x, b.x) || normalPoint.x > max(a.x, b.x) 
+        || normalPoint.y < min(a.y, b.y) || normalPoint.y > max(a.y, b.y)){
             normalPoint = b.copy();
-
+            a = path.points[(i + 1) % path.points.length];
+            b = path.points[(i + 2) % path.points.length];
+            dir = p5.Vector.sub(b, a);
+        }
+        
         var distance = p5.Vector.dist(predictPosition, normalPoint);
 
         if(distance < worldRecord){
             worldRecord = distance;
             normal = normalPoint;
-            var dir = p5.Vector.sub(b, a);
             dir.normalize();
             dir.mult(20);
-            target = normalPoint.copy();
+            target = normal.copy();
             target.add(dir);
         }
     }
 
-    if(worldRecord > path.radius)
+    if(worldRecord > steerZoneSize)
         this.seek(target);
 
     if (debug) {
@@ -61,10 +68,10 @@ Vehicle.prototype.follow = function(path){
 
       fill(225, 85);
       stroke(0, 100, 255, 85);
-      line(predictPosition.x, predictPosition.y, normal.x, normal.y);
       ellipse(normal.x, normal.y, 4, 4);
+      line(predictPosition.x, predictPosition.y, normal.x, normal.y);
       stroke(0, 100, 255, 85);
-      if (worldRecord > path.radius) 
+      if (worldRecord > steerZoneSize) 
         fill(255, 0, 0);
       noStroke();
       ellipse(target.x, target.y, 8, 8);

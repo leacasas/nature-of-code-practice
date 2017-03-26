@@ -16,21 +16,21 @@ Path.prototype.build = function(n){
         this.points.push(createVector(x, y));
         randomDir.rotate(angleIncrement);
     }
-    this.points.push(this.points[0]);
 };
 Path.prototype.display = function(){
     stroke(225, 85);
-    strokeWeight(40);
+    strokeWeight(steerZoneSize * 2);
     noFill();
     beginShape();
     for (var i = 0; i < this.points.length; i++)
       vertex(this.points[i].x, this.points[i].y);
-    endShape();
+    endShape(CLOSE);
+
     stroke(255);
     strokeWeight(1);
     noFill();
     beginShape();
     for (var i = 0; i < this.points.length; i++)
       vertex(this.points[i].x, this.points[i].y);
-    endShape();
+    endShape(CLOSE);
 };

@@ -1,6 +1,7 @@
 // jshint ignore: start
-var debug = true;
-var amountOfVehicles = 1;
+var debug = false;
+var amountOfVehicles = 300;
+var steerZoneSize = 20;
 var path;
 var vehicles = [];
 
@@ -42,7 +43,7 @@ function resetPath(){
 
 function resetVehicles(){
     for(var i = 0; i < amountOfVehicles; i++){
-        var startPos = createVector(width/4, height - 100);
+        var startPos = createVector(random(width),random(height));
         vehicles[i] = new Vehicle(startPos, random(2, 5), random(2, 6), random(0.05, 0.06));
     }
 }

@@ -1,29 +1,39 @@
 // jshint ignore: start
-var amountOfBoids = 10;
+var amountOfBoids = 128;
 var flock;
 var debug = false;
 
 function setup(){
-    createCanvas(600, 600);
+    createCanvas(1360, 660);
     smooth();
 
     flock = new Flock();
     for(var i = 0; i < amountOfBoids; i++){
         var p = createVector(random(width), random(height));
-        var boid = new Boid(p, random(2, 4), random(2, 5), random(0.02, 0.06));
+        var boid = new Boid(p, 3.0, 3, 0.05);
         flock.addBoid(boid);
     }
 }
 
 function draw(){
     background(0);
-
     flock.run();
+
+    if(debug){
+        textSize(16);
+        noStroke();
+        fill(225, 0, 0);
+        text("Separation Vector", 20, 50);
+        fill(0, 0, 255);
+        text("Alignment Vector", 20, 75); 
+        fill(225, 255, 255);
+        text("Cohesion Vector", 20, 100);
+    }
 }
 
 function mousePressed(){
     var p = createVector(mouseX, mouseY);
-    var boid = new Boid(p, random(2, 4), random(2, 5), random(0.02, 0.06));
+    var boid = new Boid(p, 3.0, 3, 0.05);
     flock.addBoid(boid);
 }
 

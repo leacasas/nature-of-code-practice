@@ -1,5 +1,5 @@
 // jshint ignore: start
-var amountOfBoids = 128;
+var amountOfBoids = 256;
 var flock;
 var debug = false;
 
@@ -28,6 +28,8 @@ function draw(){
         text("Alignment Vector", 20, 75); 
         fill(225, 255, 255);
         text("Cohesion Vector", 20, 100);
+        fill(200, 200, 200);
+        text("Boids: " + amountOfBoids, 20, 125);
     }
 }
 
@@ -35,6 +37,7 @@ function mousePressed(){
     var p = createVector(mouseX, mouseY);
     var boid = new Boid(p, 3.0, 3, 0.05);
     flock.addBoid(boid);
+    amountOfBoids++;
 }
 
 function keyPressed() {

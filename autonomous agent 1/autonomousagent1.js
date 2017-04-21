@@ -1,17 +1,19 @@
 // jshint ignore: start
 var amountOfVehicles = 1024;
 var vehicles = [];
+var mouse;
 
 function setup(){
     createCanvas(1360, 660);
-
+    mouse = createVector(0, 0);
     for(var i = 0; i < amountOfVehicles; i++)
         vehicles[i] = new Vehicle(random(width), random(height));
 }
 
 function draw(){
     background(0);
-    var mouse = createVector(mouseX, mouseY);
+    mouse.x = mouseX;
+    mouse.y = mouseY;
     fill(200);
     noStroke();
     ellipse(mouse.x, mouse.y, 10, 10);
@@ -33,9 +35,9 @@ var Vehicle = function(x, y){
 // Calculates steering force towards target.
 // Steering force = desired velocity - current velocity
 Vehicle.prototype.seek = function(target){ 
-    var desired = p5.Vector.sub(target, this.position);
-    desired.setMag(this.maxSpeed);
-    var steer = p5.Vector.sub(desired, this.velocity);
+    var steer = p5.Vector.sub(target, this.position);
+    steer.setMag(this.maxSpeed);
+    steer.sub(this.velocity);
     steer.limit(this.maxForce);
     this.applyForce(steer);
 };

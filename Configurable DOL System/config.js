@@ -5,7 +5,7 @@ var config = {
     turtle : {
         startX : 300,
         startY : 300,
-        omega : "F-F-F-F",
+        omega : "F-F", // Should be the same as axiom above.
         delta : 90,
         d : 165,
     },

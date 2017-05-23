@@ -1,29 +1,25 @@
 // jshint ignore: start
 var lsystem;
 var turtle;
-var counter = 0;
+var counter = 1;
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(660, 660);
     lsystem = new LSystem(config.axiom, config.productions);
     turtle = new Turtle(config.turtle);
 }
 
 function draw() {
-    background(0);
     translate(config.turtle.startX, config.turtle.startY);
-    turtle.render();
-    noLoop();
-}
-
-function mousePressed(){
-    if(mouseButton == LEFT && counter < config.generations){
+    while(counter < config.generations){
+        background(0);
         push();
         lsystem.generate();
         turtle.todo = lsystem.sentence;
         turtle.changeLen(config.reduction);
+        turtle.render();
         pop();
-        redraw();
         counter++;
     }
+    noLoop();
 }

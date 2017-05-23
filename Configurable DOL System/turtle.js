@@ -15,6 +15,8 @@ Turtle.prototype.render = function(){
             translate(0, -this.len);
         }else if(char === '+'){
             rotate(this.theta);
+        }else if(char === 'f'){
+            translate(0, -this.len);
         }else if(char === '-'){
             rotate(-this.theta);
         }else if(char === '['){

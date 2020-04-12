@@ -1,12 +1,12 @@
 // jshint ignore: start
 var debug = false;
-var amountOfVehicles = 100;
-var steerZoneSize = 20;
+var amountOfVehicles = 256;
+var steerZoneSize = 40;
 var path;
 var vehicles = [];
 
 function setup(){
-    createCanvas(1360, 660);
+    createCanvas(1900, 860);
     smooth();
 
     resetPath();
@@ -38,7 +38,7 @@ function mousePressed(){
 }
 
 function resetPath(){
-    path = new Path(225, random(4, 10), width/2, height/2);
+    path = new Path(300, random(4, 10), width/2, height/2);
 }
 
 function resetVehicles(){

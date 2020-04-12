@@ -18,12 +18,12 @@ function draw(){
     x = r * cos(Ɵ);
     y = r * sin(Ɵ);
     
-    stroke(127);
-    strokeWeight(2);
+    stroke(0);
+    strokeWeight(1);
     line(px, py, x, y);
 
-    Ɵ += 0.02;
-    r += 0.015;
+    Ɵ += 0.25;
+    r += 0.075;
 
     px = x;
     py = y;

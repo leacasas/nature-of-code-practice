@@ -4,7 +4,7 @@ var waves = [];
 var amountOfWaves = 5;
 
 function setup() {
-    createCanvas(1360, 660);
+    createCanvas(1600, 900);
 
     wave = new Wave(0);
     for(var i = 1; i <= amountOfWaves; i++){

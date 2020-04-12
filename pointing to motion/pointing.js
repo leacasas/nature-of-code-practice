@@ -1,8 +1,8 @@
 // jshint ignore: start
 var attractor;
 var movers = [];
-var G = 0.4;
-var amountOfMovers = 500;
+var G = 0.25;
+var amountOfMovers = 5000;
 
 function setup(){
     createCanvas(1360, 660);

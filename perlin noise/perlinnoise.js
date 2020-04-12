@@ -2,7 +2,7 @@
 var t = 0;
 
 function setup() {
-    createCanvas(1360,660);
+    createCanvas(1900,960);
     smooth();
 }
 

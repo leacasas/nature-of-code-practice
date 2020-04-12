@@ -2,7 +2,7 @@
 var attractor;
 var movers = [];
 var G = 0.25;
-var amountOfMovers = 100;
+var amountOfMovers = 10000;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);

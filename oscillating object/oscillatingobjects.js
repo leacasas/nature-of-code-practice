@@ -2,7 +2,7 @@ var oscillators = [];
 var limit = 100;
 
 function setup(){
-    createCanvas(1360, 660);
+    createCanvas(900, 900);
     smooth();
     for(var i = 0; i < limit; i++)
         oscillators[i] = new Oscillator();
@@ -18,8 +18,8 @@ function draw(){
 
 var Oscillator = function(){
     this.angle = createVector(0, 0);
-    this.velocity = createVector(random(-0.05, 0.05), random(-0.05, 0.05));
-    this.amplitude = createVector(random(20, width/2), random(20, height/2))
+    this.velocity = createVector(0.005, 0.005);
+    this.amplitude = createVector(width/3, height/3);
 };
 Oscillator.prototype.oscillate = function(){
     this.angle.add(this.velocity);

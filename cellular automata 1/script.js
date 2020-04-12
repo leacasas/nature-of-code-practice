@@ -2,7 +2,7 @@
 var ca;
 
 function setup(){
-    createCanvas(800, 400);
+    createCanvas(1600, 800);
     background(255);
     ca = new CellularAutomata();
 }
@@ -14,7 +14,7 @@ function draw(){
 }
 
 var CellularAutomata = function(){
-    this.width = 10;
+    this.width = 1;
     var length = width / this.width;
 
     this.cells = new Array(length);

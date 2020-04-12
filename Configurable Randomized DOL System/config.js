@@ -2,13 +2,13 @@
 var config = {
     axiom : "F+F+F+F",
     generations : 4,
-    reduction : 0.25,
+    reduction : 0.35,
     turtle : {
         startX : 330,
-        startY : 330,
+        startY : 500,
         omega : "F+F+F+F", // Should be the same as axiom above.
         delta : 90,
-        d : 185,
+        d : 200,
     },
     productions : [
         {
@@ -19,10 +19,10 @@ var config = {
 };
 
 function randomizeConfig(){
-    var newAxiom = generateRandomStringFromAlphabet(16);
+    var newAxiom = generateRandomStringFromAlphabet(14);
     // Config
     config.axiom = newAxiom;
-    config.generations = round(random(2, 6));
+    config.generations = round(random(2, 5));
     config.reduction = random(0.1, 0.75);
     // Turtle
     config.turtle.omega = newAxiom;
@@ -51,7 +51,7 @@ function generateProductions(){
         var c = alphabet[round(random(0, alphabet.length-1))]
         prods.push({
             predecesor : c,
-            succesor : generateRandomStringFromAlphabet(50)
+            succesor : generateRandomStringFromAlphabet(14)
         })
         alphabet = alphabet.replace(c, "");
     }

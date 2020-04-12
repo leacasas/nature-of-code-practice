@@ -1,16 +1,16 @@
 // jshint ignore: start
-var amountOfVehicles = 2000;
+var amountOfVehicles = 5;
 var flowField;
 var vehicles = [];
 var debug = true;
 
 function setup(){
-    createCanvas(1920, 1080);
+    createCanvas(1040, 640);
 
     flowField = new FlowField(40);
 
     for(var i = 0; i < amountOfVehicles; i++)
-        vehicles[i] = new Vehicle(createVector(random(width), random(height)), random(1, 3), random(0.1, 0.5));
+        vehicles[i] = new Vehicle(createVector(random(width), random(height)), random(2, 5), random(0.1, 0.5));
 }
 
 function draw(){
